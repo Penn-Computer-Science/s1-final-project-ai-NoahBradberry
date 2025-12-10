@@ -3,7 +3,7 @@ import torch
 
 class ReplayBuffer():
 
-    def __init__(self, max_size, input_shape, n_action, device = 'cpu'):
+    def __init__(self, max_size, input_shape, device = 'cpu'):
         self.mem_size = max_size
         self.mem_ctr = 0
         self.state_memory = np.zeros((self.mem_size, *input_shape), dtype =np.uint8)

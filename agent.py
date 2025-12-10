@@ -28,3 +28,20 @@ class Agent():
         self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
         print(f'Loaded model on device {self.device}')
+
+        self.memory = ReplayBuffer(max_size = 500000, input_shape = obs.shape, device = self.device)
+
+        self.model = Model(action_dim = env.action_space.n, hidden_dim = hidden_layer, observation_shape = obs.shape).to(self.device)
+
+        self.target_model = Model(action_dim = env.action_space.n, hidden_dim = hidden_layer, observation_shape = obs.shape).to(self.device)
+
+        self.target_model.load_state_dict(self.model.state_dict())
+
+        self.optimizer = optim.Adam(self.model.parameters(), lr = learning_rate)
+
+        self.learning_rate = learning_rate
+
+
+    # 1:37:07 Problems to fix
+
+        
