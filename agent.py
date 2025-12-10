@@ -1,4 +1,4 @@
-from buffer import ReplayBuffer
+from replay_buffer import ReplayBuffer
 from model import Model, soft_update
 import torch
 import torch.optim as optim
@@ -16,5 +16,15 @@ class Agent():
     def __init__(self, env, hidden_layer, learning_rate, step_repeat, gamma):
 
         self.env = env
-        
-        
+
+        self.step_repeat = step_repeat
+
+        self.gamma = gamma
+
+        obs, info = self.env.reset()
+
+        # TODO - Process  Observation
+
+        self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+
+        print(f'Loaded model on device {self.device}')
