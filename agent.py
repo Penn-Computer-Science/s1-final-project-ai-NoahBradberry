@@ -46,6 +46,57 @@ class Agent():
         obs = torch.tensor(obs, dtype = torch.float32).permute(2, 0, 1)
         return obs
     
+
+    def test(self):
+
+        self.model.load_the_model()
+
+        obs, info = self.env.reset()
+
+        done = False
+        obs, info = self.env.reset()
+        obs = self.process_observation(obs)
+
+        episode_reward = 0
+
+        while not done:
+
+            if random.random() < 0.05:
+                action = self.env.action_space.sample()
+            else:
+                q_values = self.model.forward(obs.unsqueeze(0).to(self.device))[0]
+                action = torch.argmax(q_values, dim = -1).item()
+            
+            reward = 0
+
+            for i in range(self.step_repeat):
+                reward_temp = 0
+
+                next_obs, reward_temp, done, truncated, info = self.env.step(action = action)
+
+                reward += reward_temp
+
+                frame = self.env.env.env.render()
+
+                resized_frame = cv2.resize(frame, (500, 400))
+
+                resized_frame = cv2.cvtColor(resized_frame, cv2.COLOR_RGB2BGR)
+
+                cv2.imshow("Pong AI", resized_frame)
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+                time.sleep(0.05)
+
+                if(done):
+                    break
+
+            obs = self.process_observation(next_obs)
+
+            episode_reward += reward
+
+    
     def train(self, episodes, max_episode_steps, summary_writer_suffix, batch_size, epsilon, epsilon_decay, min_epsilon):
 
         summary_writer_name = f'runs/{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_{summary_writer_suffix}'
@@ -70,7 +121,7 @@ class Agent():
             while not done and episode_steps < max_episode_steps:
 
                 if random.random() < epsilon:
-                    action = self.env.action_space_sample()
+                    action = self.env.action_space.sample()
                 else:
                     q_values = self.model.forward(obs.unsqueeze(0).to(self.device))[0]
                     action = torch.argmax(q_values, dim = -1).item()
