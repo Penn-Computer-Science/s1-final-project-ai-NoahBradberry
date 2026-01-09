@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Wuud-5WI)
 # Topics in CS - Project 5: AI (Final Project for Fall Semester)
 
 Welcome to your final project for the AI unit! This assignment serves as your final exam and challenges you to design, train, evaluate, and present an AI system of your choice.
@@ -176,16 +177,16 @@ model = keras.models.load_model("model.keras")
 ## Reflection - Complete this once you have finished!
 
 **Best performing model/run and why:**  
-*(Write here)*  
+*The last run because it spent over an hour training.*  
 
 **Most important hyperparameters and effects:**  
-*(Write here)*  
+*Learning rate, because it controls how fast the agent updates.*  
 
 **Dataset limitations or biases:**  
-*(Write here)*  
+*The model doesn't perform that good. It improves well for like 30 mins, and then doesn't get much better *  
 
 **Unexpected results:**  
-*(Write here)*  
+*It overfits very quickly.*  
 
 **What you would improve with more time:**  
-*(Write here)*  
+*I would find out why it doesn't improve that good and try to improve it.*  
