@@ -177,16 +177,16 @@ model = keras.models.load_model("model.keras")
 ## Reflection - Complete this once you have finished!
 
 **Best performing model/run and why:**  
-*(Write here)*  
+*The last run because it spent over an hour training.*  
 
 **Most important hyperparameters and effects:**  
-*(Write here)*  
+*Learning rate, because it controls how fast the agent updates.*  
 
 **Dataset limitations or biases:**  
-*(Write here)*  
+*The model doesn't perform that good. It improves well for like 30 mins, and then doesn't get much better *  
 
 **Unexpected results:**  
-*(Write here)*  
+*It overfits very quickly.*  
 
 **What you would improve with more time:**  
-*(Write here)*  
+*I would find out why it doesn't improve that good and try to improve it.*  
